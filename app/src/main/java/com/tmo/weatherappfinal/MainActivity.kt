@@ -241,7 +241,7 @@ fun ImagemCentro(temperatura: Int = 23, estadoTempo: String = "Limpo", @Drawable
                         .padding(top = 90.dp)){
                     Text("$estadoTempo",
                         fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.tertiary,
-                        fontSize= TextUnit(15f, TextUnitType.Sp),
+                        fontSize= TextUnit(18f, TextUnitType.Sp),
                         modifier = Modifier.padding(145.dp,23.dp,0.dp, 0.dp))
                 }
             }
@@ -346,7 +346,7 @@ fun DiasFuturos(day: TemperaturaDia)
                             .padding(top = 50.dp)){
                         Text("${day.Estado}",
                             fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.tertiary,
-                            fontSize= TextUnit(13f, TextUnitType.Sp),
+                            fontSize= TextUnit(16f, TextUnitType.Sp),
                             modifier = Modifier.padding(0.dp,0.dp,0.dp, 0.dp))
                     }
                 }
