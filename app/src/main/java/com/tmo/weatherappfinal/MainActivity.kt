@@ -45,6 +45,10 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+/**
+ * Classe principal da atividade que representa o aplicativo WeatherAppFinal.
+ */
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,23 +75,34 @@ fun MainApp(){
             modifier = Modifier
                 .fillMaxSize()
                 .alpha(0.4f),
-            contentScale = ContentScale.Crop)
+            contentScale = ContentScale.Crop
+        )
     }
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(
+            Brush.verticalGradient(
+                colorStops = arrayOf(
+                    Pair(0.4f, Color.Transparent),
+                    Pair(1f, MaterialTheme.colorScheme.tertiary)
+                )
+            )
+        )
+    )
     Column(modifier = Modifier
-
         .fillMaxSize()
         .padding(vertical = 5.dp)){
         HeaderPreview()
         BoasVindasUser()
         ImagemCentro()
         ProxDias()
-
     }
-
 }
 
-
-
+/**
+ * Função que exibe os botões no topo da tela.
+ * @param modifier Modificador para personalização do layout.
+ */
 @Preview(showBackground = true, widthDp = 390)
 @Composable
 fun HeaderPreview(modifier: Modifier = Modifier) {
@@ -124,6 +139,11 @@ fun HeaderPreview(modifier: Modifier = Modifier) {
     }
 }
 
+
+/**
+ * Função que exibe a mensagem de boas-vindas e a data atual.
+ * @param username O nome de user a ser exibido.
+ */
 @Preview(showBackground = true, widthDp = 390)
 @Composable
 fun BoasVindasUser(username: String= "Tomás")
@@ -135,11 +155,11 @@ fun BoasVindasUser(username: String= "Tomás")
         Row(modifier = Modifier.fillMaxWidth())  {
             Text("Olá",
                 fontSize= TextUnit(30f, TextUnitType.Sp ),
-                color= MaterialTheme.colorScheme.primary,
+                color= MaterialTheme.colorScheme.tertiary,
                 fontWeight = FontWeight.Normal )
             Text(" $username",
                 fontWeight = FontWeight.ExtraBold,
-                color= MaterialTheme.colorScheme.primary,
+                color= MaterialTheme.colorScheme.tertiary,
                 fontSize= TextUnit(30f, TextUnitType.Sp)
             )
         }
@@ -147,17 +167,23 @@ fun BoasVindasUser(username: String= "Tomás")
             Text(formatData(Calendar.getInstance().time),
                 fontSize= TextUnit(20f, TextUnitType.Sp ),
                 fontWeight = FontWeight.Normal,
-                color = MaterialTheme.colorScheme.secondary)
+                color = MaterialTheme.colorScheme.tertiary)
         }
         Row(modifier = Modifier.fillMaxWidth())  {
             Text("Glória do Ribatejo",
                 fontSize= TextUnit(20f, TextUnitType.Sp ),
                 fontWeight = FontWeight.Normal,
-                color = MaterialTheme.colorScheme.secondary)
+                color = MaterialTheme.colorScheme.tertiary)
         }
     }
 }
 
+/**
+ * Função que exibe a imagem central com temperatura e condições meteorológicas.
+ * @param temperatura A temperatura atual.
+ * @param estadoTempo A condição meteorológica atual.
+ * @param iconResource O recurso de imagem para representar o estado do tempo.
+ */
 @Preview(showBackground = true, widthDp = 390)
 @Composable
 fun ImagemCentro(temperatura: Int = 23, estadoTempo: String = "Limpo", @DrawableRes iconResource: Int= R.drawable.sun)
@@ -205,7 +231,7 @@ fun ImagemCentro(temperatura: Int = 23, estadoTempo: String = "Limpo", @Drawable
                     Text("$temperatura"+"º",
                         modifier = Modifier.padding(0.dp,0.dp,100.dp, 0.dp),
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.tertiary,
                         fontSize= TextUnit(55f, TextUnitType.Sp))
                 }
                 Box(
@@ -214,7 +240,7 @@ fun ImagemCentro(temperatura: Int = 23, estadoTempo: String = "Limpo", @Drawable
                         .fillMaxSize()
                         .padding(top = 90.dp)){
                     Text("$estadoTempo",
-                        fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.tertiary,
                         fontSize= TextUnit(15f, TextUnitType.Sp),
                         modifier = Modifier.padding(145.dp,23.dp,0.dp, 0.dp))
                 }
@@ -232,7 +258,7 @@ fun ProxDias()
         Row(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text("Próximos 7 dias",
                 fontSize= TextUnit(28f, TextUnitType.Sp ),
-                color= MaterialTheme.colorScheme.primary,
+                color= MaterialTheme.colorScheme.tertiary,
                 fontWeight = FontWeight.Bold )
         }
 
@@ -247,6 +273,12 @@ fun ProxDias()
     }
 }
 
+/**
+ * Estrutura de dados para representar a temperatura e condições meteorológicas de um dia.
+ * @param Temperatura A temperatura do dia.
+ * @param Estado O estado do tempo.
+ * @param Resource O recurso de imagem associado ao estado do tempo.
+ */
 data class TemperaturaDia(val Temperatura:Int, val Estado:String, val Resource:Int)
 val listaDeTemperaturas = listOf(
     TemperaturaDia(-3, "Neve", R.drawable.snowy),
@@ -258,6 +290,10 @@ val listaDeTemperaturas = listOf(
     TemperaturaDia(1, "Neve", R.drawable.snowy)
 )
 
+/**
+ * Função que exibe a previsão do tempo para um dia específico.
+ * @param day O objeto TemperaturaDia que representa o dia.
+ */
 @Composable
 fun DiasFuturos(day: TemperaturaDia)
 {
@@ -300,7 +336,7 @@ fun DiasFuturos(day: TemperaturaDia)
                         Text("${day.Temperatura}"+"º",
                             modifier = Modifier.padding(0.dp,0.dp,0.dp, 0.dp),
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.tertiary,
                             fontSize= TextUnit(25f, TextUnitType.Sp))
                     }
                     Box(
@@ -309,7 +345,7 @@ fun DiasFuturos(day: TemperaturaDia)
                             .fillMaxSize()
                             .padding(top = 50.dp)){
                         Text("${day.Estado}",
-                            fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.ExtraLight,color= MaterialTheme.colorScheme.tertiary,
                             fontSize= TextUnit(13f, TextUnitType.Sp),
                             modifier = Modifier.padding(0.dp,0.dp,0.dp, 0.dp))
                     }
@@ -320,7 +356,11 @@ fun DiasFuturos(day: TemperaturaDia)
     }
 }
 
-
+/**
+ * Função que formata uma data em um formato específico.
+ * @param data A data a ser formatada.
+ * @return A data formatada no formato "dd MMMM, EEEE yyyy".
+ */
 fun formatData(data: Date): String {
     val format = SimpleDateFormat("dd MMMM, EEEE yyyy", Locale("pt", "PT"))
     return format.format(data)
